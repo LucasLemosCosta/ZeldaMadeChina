@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerWalkState : PlayerState
+public class PlayerWalkState : PlayerGroundState
 {
     public PlayerWalkState(PlayerController player, StateMachine stateMachine, string stateBoolName) : base(player, stateMachine, stateBoolName)
     {

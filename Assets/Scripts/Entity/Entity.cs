@@ -1,3 +1,5 @@
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
@@ -12,6 +14,14 @@ public abstract class Entity : MonoBehaviour
     //Components
     public Animator Anim { get; protected set; }
     public StateMachine StateMachine { get; protected set; }
+
+
+    //Controllers
+    [Header("Collider Ground Settings")]
+    [SerializeField] private float sizeRaySphereGround = 0.5f;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private Transform targetGround;
+    public bool OnGround { get; protected set; }
 
     public virtual void Awake()
     {
@@ -33,6 +43,14 @@ public abstract class Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         HandleGravity();
+        HandleCollider();
+    }
+
+    public virtual void OnDrawGizmos()
+    {
+        if (targetGround == null) targetGround = transform;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(targetGround.position, sizeRaySphereGround);
     }
 
 
@@ -40,4 +58,17 @@ public abstract class Entity : MonoBehaviour
     {
 
     }
+
+    public virtual void HandleCollider()
+    {
+        CheckGround();
+    }
+
+
+    private void CheckGround()
+    {
+        OnGround = Physics.CheckSphere(targetGround.position, sizeRaySphereGround, whatIsGround);
+    }
+
+
 }

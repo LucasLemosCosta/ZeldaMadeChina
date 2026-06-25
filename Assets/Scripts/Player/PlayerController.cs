@@ -8,6 +8,7 @@ public sealed class PlayerController : Entity
     public PlayerIdleState IdleState { get; private set; }
     public PlayerWalkState WalkState { get; private set; }
     public PlayerRunState RunState { get; private set; }
+    public PlayerFallState FallState { get; private set; }
 
     //Componets
     public GetInput input { get; private set; }
@@ -25,7 +26,7 @@ public sealed class PlayerController : Entity
     public override void Awake()
     {
         base.Awake();
-
+        yVelocity = -gravity;
         //Get Componests
         input = GetComponentInChildren<GetInput>();
         controller = GetComponent<CharacterController>();
@@ -34,6 +35,7 @@ public sealed class PlayerController : Entity
         IdleState = new PlayerIdleState(this, StateMachine, "Idle");
         WalkState = new PlayerWalkState(this, StateMachine, "Walk");
         RunState = new PlayerRunState(this, StateMachine, "Run");
+        FallState = new PlayerFallState(this, StateMachine, "Fall");
     }
 
     public override void Start()
@@ -60,6 +62,7 @@ public sealed class PlayerController : Entity
         //Make player fall
         Vector3 down = new Vector3(0, yVelocity, 0);
         controller.Move(down * Time.fixedDeltaTime);
+        Anim.SetFloat("yVelocity", yVelocity);
     }
 
     public void MovingPlayer(Vector2 direction,float speed)
