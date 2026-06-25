@@ -4,22 +4,22 @@ public class StateMachine
 {
 
     private bool canChangeState = true;
-    private EntityState currentState;
+    public EntityState CurrentState { get; private set; }
 
 
     public void InitStateMachine(EntityState state)
     {
-        currentState = state;
-        currentState.Enter();
+        CurrentState = state;
+        CurrentState.Enter();
     }
 
     public void ChangeState(EntityState state)
     {
         if (!canChangeState) return;
 
-        currentState.Exit();
-        currentState = state;
-        currentState.Enter();
+        CurrentState.Exit();
+        CurrentState = state;
+        CurrentState.Enter();
     }
 
 }

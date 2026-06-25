@@ -4,8 +4,9 @@ public abstract class Entity : MonoBehaviour
 {
 
     [Header("Settings Moving")]
-    public float speed;
-    public float rotationSpeed;
+    public float speed = 5f;
+    public float rotationSpeed = 7f;
+    public float gravity = 9.7f;
 
 
     //Components
@@ -23,9 +24,20 @@ public abstract class Entity : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     public virtual void Update()
     {
-        
+        StateMachine.CurrentState.UpdateState();
+    }
+
+    // Update is called once per frame
+    public virtual void FixedUpdate()
+    {
+        HandleGravity();
+    }
+
+
+    public virtual void HandleGravity()
+    {
+
     }
 }
