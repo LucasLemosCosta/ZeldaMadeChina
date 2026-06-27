@@ -13,9 +13,8 @@ public class PlayerIdleState : PlayerGroundState
         player.MovingPlayer(Vector2.zero, 0);
 
 
-        if (input.Direction != Vector2.zero)
+        if (input.Direction != Vector2.zero && player.OnGround )
         {
-
             stateMachine.ChangeState(player.WalkState);
         }
 

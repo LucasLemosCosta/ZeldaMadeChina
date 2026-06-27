@@ -6,7 +6,10 @@ public abstract class EntityState
     protected string stateBoolName;
     protected StateMachine stateMachine;
     protected Animator anim;
-    
+
+    protected int mirror = 1;
+
+
     public EntityState(StateMachine stateMachine, string stateBoolName)
     {
         this.stateBoolName = stateBoolName;
@@ -16,7 +19,6 @@ public abstract class EntityState
     public virtual void Enter()
     {
         anim.SetBool(stateBoolName, true);
-        Debug.Log(stateBoolName);
     }
 
     public virtual void UpdateState()

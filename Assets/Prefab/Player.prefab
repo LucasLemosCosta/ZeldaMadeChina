@@ -25,7 +25,38 @@ Transform:
   m_GameObject: {fileID: 1574617716654229218}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.053, z: 0}
+  m_LocalPosition: {x: 0, y: 0.078, z: -0.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2971545649377625936}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2451036092050545923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4882819795711709637}
+  m_Layer: 0
+  m_Name: targetWallUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4882819795711709637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2451036092050545923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -129,6 +160,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d1e5d140-141b-4ad5-b6c2-b4196cc99568
     m_ActionName: 'Camera/DirectionY[/XInputControllerWindows/rightStick/down,/XInputControllerWindows/rightStick/up]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6764137771308507408}
+        m_TargetAssemblyTypeName: GetInput, Assembly-CSharp
+        m_MethodName: InputJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7700ba9d-449e-4481-aa6f-bee0baac892a
+    m_ActionName: 'Player/Jump[/XInputControllerWindows/buttonSouth]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -146,6 +193,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0529dfb393b38a94ab3ef2b2825cabc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GetInput
+--- !u!1 &6165425426060048277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3433578662131112008}
+  m_Layer: 0
+  m_Name: targetWallDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3433578662131112008
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165425426060048277}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.48, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2971545649377625936}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7999572244659186049
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 7999572244659186049}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.59, z: 0}
+  m_LocalPosition: {x: 0, y: 0.895, z: 0.072}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,7 +269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.9
+      value: 12.84
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -229,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5663245505148278786, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -241,6 +323,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2143185453152469341}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3433578662131112008}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4882819795711709637}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8151fe82ee363154da8d2cccd15c9df9, type: 3}
       insertIndex: -1
@@ -270,14 +358,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 3
-  rotationSpeed: 15
+  jump: 3
+  rotationSpeed: 0.06
   gravity: 9.7
-  sizeRaySphereGround: 0.2
+  sizeRaySphereGround: 0.13
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   targetGround: {fileID: 2143185453152469341}
-  acel: 0.33
+  acel: 0.08
+  climbingSpeed: 3
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 64
+  timeToCanClimb: 1
+  sizeRayWallDistance: 0.42
+  sizeRayWallSphere: 0.02
+  targetWallUp: {fileID: 4882819795711709637}
+  targetWallDown: {fileID: 3433578662131112008}
+  lookWallAngleMin: 175
 --- !u!95 &7067523976413760826
 Animator:
   serializedVersion: 7
@@ -295,7 +394,9 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tFrom animation clip 'PlayerClipDownRemake'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

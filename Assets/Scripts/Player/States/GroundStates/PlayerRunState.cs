@@ -11,9 +11,11 @@ public class PlayerRunState : PlayerGroundState
         base.UpdateState();
 
         player.MovingPlayer(input.Direction, player.speed * 2f);
-        if (!input.Run)
-            stateMachine.ChangeState(player.WalkState);
-        if (input.Direction == Vector2.zero)
+        if (!input.OnRun || input.Direction == Vector2.zero)
             stateMachine.ChangeState(player.IdleState);
+        if (player.OnWallDown && player.OnWallUp && player.CanClimp)
+            stateMachine.ChangeState(player.ClimbingState);
+
+
     }
 }

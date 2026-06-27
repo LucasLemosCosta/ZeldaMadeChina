@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StateMachine
+public sealed class StateMachine
 {
 
     private bool canChangeState = true;

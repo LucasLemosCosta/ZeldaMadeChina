@@ -8,8 +8,16 @@ public class PlayerGroundState : PlayerState
 
     public override void UpdateState()
     {
+        player.HandleGravity();
         base.UpdateState();
-        if (!player.OnGround)
+        if (input.OnJump && player.OnGround && stateMachine.CurrentState != player.RunningJumpState && input.Direction != Vector2.zero)
+            stateMachine.ChangeState(player.RunningJumpState);
+        if (input.OnJump && player.OnGround && stateMachine.CurrentState != player.RunningJumpState && input.Direction == Vector2.zero)
+            stateMachine.ChangeState(player.IdleJumpState);
+        if (!player.OnGround && player.yVelocity < 0f)
             stateMachine.ChangeState(player.FallState);
+
+
+
     }
 }
