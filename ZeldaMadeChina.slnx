@@ -53,6 +53,7 @@
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="Unity.Formats.Fbx.Editor.csproj" />
   <Project Path="UnityEditor.UI.csproj" />
+  <Project Path="Unity.2D.Sprite.Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.csproj" />
   <Project Path="Unity.Cloud.AppLinking.Embedded.csproj" />
   <Project Path="Unity.Multiplayer.Center.Common.csproj" />

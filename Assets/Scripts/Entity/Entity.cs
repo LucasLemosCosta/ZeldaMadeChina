@@ -71,4 +71,8 @@ public abstract class Entity : MonoBehaviour
     }
 
 
+    public void SetAnableTriggerAnimation(bool enable) =>
+        StateMachine.CurrentState.SetAnableTriggerAnimation(true);
+
+
 }

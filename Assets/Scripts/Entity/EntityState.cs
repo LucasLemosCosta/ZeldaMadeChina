@@ -8,6 +8,8 @@ public abstract class EntityState
     protected Animator anim;
 
     protected int mirror = 1;
+    protected bool triggerAnimationEnd;
+
 
 
     public EntityState(StateMachine stateMachine, string stateBoolName)
@@ -30,8 +32,12 @@ public abstract class EntityState
     public virtual void Exit()
     {
         anim.SetBool(stateBoolName, false);
+        triggerAnimationEnd = false;
 
     }
+    public void SetAnableTriggerAnimation(bool anable) => triggerAnimationEnd = anable;
+
+
 
 
 

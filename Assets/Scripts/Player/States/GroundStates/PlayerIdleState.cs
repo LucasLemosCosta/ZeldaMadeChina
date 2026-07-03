@@ -11,6 +11,7 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.UpdateState();
         player.MovingPlayer(Vector2.zero, 0);
+        player.stamina.IncreaseStamina();
 
 
         if (input.Direction != Vector2.zero && player.OnGround )

@@ -12,10 +12,13 @@ public sealed class PlayerController : Entity
     public PlayerJumpRunningState RunningJumpState { get; private set; }
     public PlayerJumpIdleState IdleJumpState { get; private set; }
     public PlayerClimbingState ClimbingState { get; private set; }
+    public PlayerClimpingAut ClimpingAutState { get; private set; }
+
 
     //Componets
     public GetInput input { get; private set; }
     public CharacterController controller { get; private set; }
+    public Stamina stamina { get; private set; }
 
 
     [Header("Settings Moving")]
@@ -32,6 +35,7 @@ public sealed class PlayerController : Entity
     [SerializeField] private Transform targetWallDown;
 
     //Controllers
+    
     public float yVelocity { get; private set; } = 0f;
     private float currentSpeed;
     private float currentClimpSpeed;
@@ -58,6 +62,7 @@ public sealed class PlayerController : Entity
         base.Awake();
         yVelocity = -gravity;
         //Get Componests
+        stamina = GetComponentInChildren<Stamina>();
         input = GetComponentInChildren<GetInput>();
         controller = GetComponent<CharacterController>();
 
@@ -69,6 +74,7 @@ public sealed class PlayerController : Entity
         RunningJumpState = new PlayerJumpRunningState(this, StateMachine, "RunningJump");
         IdleJumpState = new PlayerJumpIdleState(this, StateMachine, "IdleJump");
         ClimbingState = new PlayerClimbingState(this, StateMachine, "Climbing");
+        ClimpingAutState = new PlayerClimpingAut(this, StateMachine, "ClimbingAut");
     }
 
     public override void Start()
@@ -141,7 +147,7 @@ public sealed class PlayerController : Entity
         {
             //Rotation Player
             Quaternion targetRotation = Quaternion.LookRotation(moviment);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
            
         }
 
@@ -155,7 +161,7 @@ public sealed class PlayerController : Entity
 
     public void PlayerWallMoving(Vector2 direction,float climSpeed)
     {
-        Vector3 inputDirection = new Vector3(0, direction.y, direction.x).normalized;
+        Vector3 inputDirection = new Vector3(direction.x, direction.y, 0f).normalized;
         Vector3 moving = inputDirection;
 
         if (direction.y == 0)
@@ -200,6 +206,8 @@ public sealed class PlayerController : Entity
 
         */
     }
+
+
 
 
     public void EnableCanClimbing(bool enable) => CanClimp = enable;

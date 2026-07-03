@@ -15,14 +15,27 @@ public class PlayerClimbingState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        if(player.yVelocity > 0)
+
+        if(input.Direction != Vector2.zero)
+        {
+            player.stamina.DecriseStamina();
+        }
+
+        if (player.yVelocity > 0)
             player.HandleGravity();
         player.PlayerWallMoving(input.Direction, player.climbingSpeed);
-        if (input.OnRun || !player.OnWallUp || !player.OnWallDown|| (player.OnGround && player.yVelocity <= 0))
+        if (input.OnRun || !player.OnWallUp || !player.OnWallDown
+            || (player.OnGround && player.yVelocity <= 0) 
+            || player.stamina.currentStamina <= 0.1f || !player.stamina.canSpandStamina
+            
+            )
         {
             player.JumpPlayer(0);
             stateMachine.ChangeState(player.FallState);
         }
+
+        if (player.OnWallDown && !player.OnWallUp)
+            stateMachine.ChangeState(player.ClimpingAutState);
     }
 
 

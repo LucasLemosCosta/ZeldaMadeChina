@@ -12,7 +12,19 @@ public class PlayerState : EntityState
         anim = player.Anim;
         input = player.input;
         controller = player.controller;
+
     }
+
+
+    public override void Enter()
+    {
+        base.Enter();
+
+    }
+
+
+
+
 
     
 }

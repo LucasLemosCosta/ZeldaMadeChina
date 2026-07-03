@@ -10,7 +10,5 @@ public class PlayerJumpIdleState : PlayerGroundState
     {
         base.Enter();
         player.JumpPlayer(player.jump);
-        if (player.OnWallDown)
-            stateMachine.ChangeState(player.ClimbingState);
     }
 }
