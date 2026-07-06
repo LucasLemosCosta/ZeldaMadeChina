@@ -21,6 +21,11 @@ public sealed class PlayerController : Entity
     public Stamina stamina { get; private set; }
 
 
+
+    //Equipement
+    public bool SwordEquiped { get; private set; }
+
+
     [Header("Settings Moving")]
     [Range(0,1)][SerializeField] private float acel = 0.1f;
     public float climbingSpeed = 3f;
@@ -34,8 +39,12 @@ public sealed class PlayerController : Entity
     [SerializeField] private Transform targetWallUp;
     [SerializeField] private Transform targetWallDown;
 
+    [Header("Sword")]
+    [SerializeField] private GameObject equippedSword;
+    [SerializeField] private GameObject unequipSword;
+
     //Controllers
-    
+
     public float yVelocity { get; private set; } = 0f;
     private float currentSpeed;
     private float currentClimpSpeed;
@@ -96,6 +105,11 @@ public sealed class PlayerController : Entity
                 CanClimp = true;
             }
         }
+
+        
+        //test sword
+        equippedSword.SetActive(SwordEquiped);
+        unequipSword.SetActive(!SwordEquiped);
     }
     public override void OnDrawGizmos()
     {
@@ -181,29 +195,6 @@ public sealed class PlayerController : Entity
 
         controller.Move(moving * Time.deltaTime * currentClimpSpeed);
 
-        /*
-        Vector3 inputDirection = new Vector3(direction.x,0, direction.y * -1).normalized;
-        Vector3 moving = Camera.main.transform.TransformDirection(inputDirection);
-        moving.z = 0;
-
-        if (direction.y == 0)
-        {
-            currentClimpSpeed = Mathf.Lerp(currentClimpSpeed, 0f, 0.01f);
-            Anim.SetFloat("MoveY", currentClimpSpeed * lastDirection);
-
-
-        }
-        else
-        {
-          currentClimpSpeed = Mathf.Lerp(currentClimpSpeed, climSpeed, 0.01f);
-          Anim.SetFloat("MoveY", direction.y * currentClimpSpeed);
-          lastDirection = direction.y;
-        }
-
-        
-        controller.Move(moving * Time.deltaTime * currentClimpSpeed);
-
-        */
     }
 
 

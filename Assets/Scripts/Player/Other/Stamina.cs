@@ -6,16 +6,23 @@ public class Stamina : MonoBehaviour
 {
 
 
-    public float maxStamina;
     public float currentStamina { get; private set; }
     public bool canSpandStamina { get; private set; }
 
+    [Header("Images")]
     public Image usedStamina;
     public Image secondUsedStamina;
+    
+    [Header("Info")]
+    public float maxStamina;
+    public float timeToHideStamina = 1f;
+    public bool change;
+
+    private bool show;
+    private float timer;
     private Animator anim;
 
 
-    public bool change;
 
 
     private void Awake()
@@ -26,17 +33,19 @@ public class Stamina : MonoBehaviour
 
     private void Update()
     {
+        anim.SetBool("Show", show); //Play Animation
 
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Camera.main.transform.rotation,
-            //Time.deltaTime * 1000f);
-
-        if(change)
+        if(show)
         {
-            anim.SetBool("Show", false);
-            anim.SetBool("Out", true);
-            change = false;
+            timer += Time.deltaTime;
+            if(timer >= timeToHideStamina)
+            {
+                timer = 0;
+                HideStamina();
+            }
         }
 
+        //Cooldown stamina
         if(!canSpandStamina)
         {
             if (currentStamina >= maxStamina)
@@ -45,43 +54,30 @@ public class Stamina : MonoBehaviour
             }
         }
     }
+
+
+    public void ShowStamina() => show = true;
+
+    public void HideStamina() => show = false;
+
     public void IncreaseStamina()
     {
         if(currentStamina < maxStamina)
         {
-            anim.SetBool("Out", false);
-            anim.SetBool("Show", true);
             currentStamina = Mathf.Lerp(currentStamina, maxStamina + 1, 0.6f * Time.deltaTime);
             usedStamina.fillAmount = currentStamina / maxStamina;
-
-
-        }
-        else
-        {
-            anim.SetBool("Show", false);
-            anim.SetBool("Out", true);
+            ShowStamina();
         }
 
-        change = true;
 
     }
-
-
-    public void ShowStamina()
-    {
-        anim.SetBool("Out", false);
-        anim.SetBool("Show", true);
-    }
-
     public void DecriseStamina()
     {
+        ShowStamina();
         currentStamina = Mathf.Lerp(currentStamina, -1, 0.5f * Time.deltaTime);
 
         usedStamina.fillAmount = currentStamina / maxStamina;
         secondUsedStamina.fillAmount = usedStamina.fillAmount + 0.1f;
-        anim.SetBool("Out", false);
-        anim.SetBool("Show", true);
-        change = true;
 
         if(currentStamina <= 1f)
         {

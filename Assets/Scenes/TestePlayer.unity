@@ -546,6 +546,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &731548738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2463481070167765516, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+  m_PrefabInstance: {fileID: 764028668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &764028668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -615,9 +620,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6837334701619554789, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+      propertyPath: speed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6837334701619554789, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
       propertyPath: stamina
       value: 
       objectReference: {fileID: 1160858430}
+    - target: {fileID: 6837334701619554789, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+      propertyPath: unequipSword
+      value: 
+      objectReference: {fileID: 731548738}
+    - target: {fileID: 6837334701619554789, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+      propertyPath: equippedSword
+      value: 
+      objectReference: {fileID: 1245301622}
+    - target: {fileID: 6837334701619554789, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+      propertyPath: rotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7927280109607414677, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
       propertyPath: m_Camera
       value: 
@@ -736,9 +757,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad15f56519346db4abd35a52e4cff7e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Stamina
-  maxStamina: 30
   usedStamina: {fileID: 1059258013}
   secondUsedStamina: {fileID: 1210738525}
+  maxStamina: 30
+  timeToHideStamina: 1
   change: 0
 --- !u!95 &1160858431
 Animator:
@@ -1019,6 +1041,11 @@ RectTransform:
   m_AnchoredPosition: {x: -48.000008, y: 96.999985}
   m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1245301622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7011102883893219610, guid: 61a5e382129d9994a942cbd8048f4391, type: 3}
+  m_PrefabInstance: {fileID: 764028668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1357625599
 GameObject:
   m_ObjectHideFlags: 0
