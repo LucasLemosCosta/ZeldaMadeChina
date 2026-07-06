@@ -62,7 +62,7 @@ public sealed class PlayerController : Entity
         base.Awake();
         yVelocity = -gravity;
         //Get Componests
-        stamina = GetComponentInChildren<Stamina>();
+        stamina = GameObject.FindFirstObjectByType<Stamina>().GetComponent<Stamina>();
         input = GetComponentInChildren<GetInput>();
         controller = GetComponent<CharacterController>();
 
@@ -119,7 +119,6 @@ public sealed class PlayerController : Entity
         {
             yVelocity += Time.deltaTime * -gravity;
         }
-
 
         //Make player fall
         Vector3 down = new Vector3(0, yVelocity, 0);

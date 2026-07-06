@@ -12,23 +12,26 @@ public class PlayerClimpingAut : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.JumpPlayer(player.jump * 2f);
+        player.JumpPlayer(6.5f);
         originalControllerHeight = controller.height;
         originalControllerCenter = controller.center;
-        controller.height *= 0.1f;
-        controller.center = new Vector3(0f, 3f,0f);
+
+
+
     }
 
 
     public override void UpdateState()
     {
         base.UpdateState();
-        controller.Move(player.transform.forward * player.climbingSpeed * 1.3f * Time.deltaTime);
+        controller.Move(player.transform.forward * player.speed * 1.5f * Time.deltaTime);
+
+        player.HandleGravity();
 
         if (triggerAnimationEnd)
         {
-            player.JumpPlayer(6f);
-            stateMachine.ChangeState(player.FallState);
+            player.JumpPlayer(0f);
+            stateMachine.ChangeState(player.IdleState);
         }
                 
                 
@@ -44,7 +47,7 @@ public class PlayerClimpingAut : PlayerState
         controller.center = originalControllerCenter;
 
     }
-
+    
 
     
 

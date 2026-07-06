@@ -17,6 +17,7 @@ public class PlayerJumpRunningState : PlayerGroundState
     public override void UpdateState()
     {
         base.UpdateState();
+        player.stamina.ShowStamina();
         player.MovingPlayer(input.Direction, player.speed * 2);
         if (player.OnWallDown)
             stateMachine.ChangeState(player.ClimbingState);

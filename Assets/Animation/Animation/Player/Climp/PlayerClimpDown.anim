@@ -47,7 +47,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: MasterSword1
+    path: Sword/Disable
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -91,7 +91,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: MasterSword1
+    path: Sword/Disable
   m_ScaleCurves: []
   m_FloatCurves:
   - serializedVersion: 2
@@ -37078,7 +37078,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 2988001634
+      path: 3862645244
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -37087,7 +37087,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 2988001634
+      path: 3862645244
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -75306,7 +75306,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -75354,7 +75354,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -75402,7 +75402,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -75441,7 +75441,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -75480,7 +75480,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -75519,7 +75519,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 16
@@ -75531,8 +75531,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: MasterSword1
+    attribute: m_LocalEulerAngles.z
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -75544,7 +75544,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: MasterSword1
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -75555,8 +75555,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: MasterSword1
+    attribute: m_LocalEulerAngles.x
+    path: Sword/Disable
     classID: 4
     script: {fileID: 0}
     flags: 0

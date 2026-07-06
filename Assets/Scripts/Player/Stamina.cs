@@ -27,8 +27,8 @@ public class Stamina : MonoBehaviour
     private void Update()
     {
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, Camera.main.transform.rotation,
-            Time.deltaTime * 1000f);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Camera.main.transform.rotation,
+            //Time.deltaTime * 1000f);
 
         if(change)
         {
@@ -64,6 +64,13 @@ public class Stamina : MonoBehaviour
 
         change = true;
 
+    }
+
+
+    public void ShowStamina()
+    {
+        anim.SetBool("Out", false);
+        anim.SetBool("Show", true);
     }
 
     public void DecriseStamina()
