@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerClimbingState : PlayerState
 {
+
+    protected Quaternion fixRotation;
     public PlayerClimbingState(PlayerController player, StateMachine stateMachine, string stateBoolName) : base(player, stateMachine, stateBoolName)
     {
     }
@@ -10,11 +12,14 @@ public class PlayerClimbingState : PlayerState
     {
         base.Enter();
         player.JumpPlayer(player.jump * 1.6f);
+        fixRotation = player.transform.rotation;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
+
+        player.transform.rotation = fixRotation;
 
         if(input.Direction != Vector2.zero)
         {

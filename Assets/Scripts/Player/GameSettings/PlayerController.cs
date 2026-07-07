@@ -27,7 +27,7 @@ public sealed class PlayerController : Entity
 
 
     [Header("Settings Moving")]
-    [Range(0,1)][SerializeField] private float acel = 0.1f;
+    [Range(0, 1)][SerializeField] private float acel = 0.1f;
     public float climbingSpeed = 3f;
 
 
@@ -49,7 +49,9 @@ public sealed class PlayerController : Entity
     private float currentSpeed;
     private float currentClimpSpeed;
     private float jumpMirror = 1;
-    private float lastDirection = 1f;
+    private float lastDirectionY = 1f;
+    private float lastDirectionX = 1f;
+
 
     //Wall Settings
     public bool OnWallUp { get; private set; }
@@ -96,17 +98,17 @@ public sealed class PlayerController : Entity
         base.Update();
 
 
-        if(!CanClimp)
+        if (!CanClimp)
         {
             timerToCanClimp += Time.deltaTime;
-            if(timerToCanClimp >= timeToCanClimb)
+            if (timerToCanClimp >= timeToCanClimb)
             {
                 timerToCanClimp = 0;
                 CanClimp = true;
             }
         }
 
-        
+
         //test sword
         equippedSword.SetActive(SwordEquiped);
         unequipSword.SetActive(!SwordEquiped);
@@ -116,11 +118,11 @@ public sealed class PlayerController : Entity
         base.OnDrawGizmos();
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(targetWallUp.position + transform.forward * sizeRayWallDistance,sizeRayWallSphere);
-        Gizmos.DrawWireSphere(targetWallDown.position + transform.forward * sizeRayWallDistance,sizeRayWallSphere);
+        Gizmos.DrawWireSphere(targetWallUp.position + transform.forward * sizeRayWallDistance, sizeRayWallSphere);
+        Gizmos.DrawWireSphere(targetWallDown.position + transform.forward * sizeRayWallDistance, sizeRayWallSphere);
 
     }
-    
+
 
     //Methods 
 
@@ -129,7 +131,7 @@ public sealed class PlayerController : Entity
         base.HandleGravity();
 
         //Decrease yVelocity
-        if(yVelocity > -gravity)
+        if (yVelocity > -gravity)
         {
             yVelocity += Time.deltaTime * -gravity;
         }
@@ -146,22 +148,22 @@ public sealed class PlayerController : Entity
         OnWallUp = Physics.SphereCast(targetWallUp.position, sizeRayWallSphere, transform.forward, out wallHitUp, sizeRayWallDistance, whatIsWall);
         OnWallDown = Physics.SphereCast(targetWallDown.position, sizeRayWallSphere, transform.forward, out wallHitDown, sizeRayWallDistance, whatIsWall);
 
-        
+
     }
-    public void MovingPlayer(Vector2 direction,float speed)
+    public void MovingPlayer(Vector2 direction, float speed)
     {
         //Get Direction
         Vector3 inputDirection = new Vector3(direction.x, 0f, direction.y).normalized;
         Vector3 moviment = Camera.main.transform.TransformDirection(inputDirection);
         moviment.y = 0;
 
-       
-        if(inputDirection != Vector3.zero)
+
+        if (inputDirection != Vector3.zero)
         {
             //Rotation Player
             Quaternion targetRotation = Quaternion.LookRotation(moviment);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-           
+
         }
 
         //Acelerate
@@ -172,28 +174,62 @@ public sealed class PlayerController : Entity
 
     }
 
-    public void PlayerWallMoving(Vector2 direction,float climSpeed)
+    public void PlayerWallMoving(Vector2 direction, float climSpeed)
     {
-        Vector3 inputDirection = new Vector3(direction.x, direction.y, 0f).normalized;
-        Vector3 moving = inputDirection;
 
-        if (direction.y == 0)
+        //Get Directions 
+
+        Vector3 inputDirectionX = Vector2.zero;
+        Vector3 inputDirectionY = new Vector3(0f, direction.y, 0f).normalized;
+
+        if (transform.forward.x >= 0.8f)
+        {
+            inputDirectionX = new Vector3(0f, 0f, direction.x).normalized;
+
+        }
+        else if (transform.forward.z >= 0.8f)
+        {
+            inputDirectionX = new Vector3(direction.x, 0f, 0f).normalized;
+
+        }
+
+        Vector3 movingY = inputDirectionY;
+        Vector3 movingX = inputDirectionX;
+
+
+        if (movingX.magnitude == 0 && movingY.magnitude == 0)
         {
             currentClimpSpeed = Mathf.Lerp(currentClimpSpeed, 0f, 0.01f);
-            Anim.SetFloat("MoveY", currentClimpSpeed * lastDirection);
-
+            Anim.SetFloat("MoveY", currentClimpSpeed * lastDirectionY);
+            Anim.SetFloat("MoveX", currentClimpSpeed * lastDirectionX);
 
         }
-
         else
         {
+
             currentClimpSpeed = Mathf.Lerp(currentClimpSpeed, climSpeed, 0.01f);
-            Anim.SetFloat("MoveY", direction.y * currentClimpSpeed);
-            lastDirection = direction.y;
+
+            if (movingY.magnitude >= 1)
+            {
+                Anim.SetFloat("MoveY", direction.y * currentClimpSpeed);
+                lastDirectionY = direction.y;
+                lastDirectionX = 0;
+
+            }
+            
+            
+
+
+            if (movingX.magnitude >= 1)
+            {
+                Anim.SetFloat("MoveX", direction.x * currentClimpSpeed);
+                lastDirectionX = direction.x;
+                lastDirectionY = 0;
+            }
         }
 
-
-        controller.Move(moving * Time.deltaTime * currentClimpSpeed);
+        controller.Move(movingY * Time.deltaTime * currentClimpSpeed);
+        controller.Move(movingX * Time.deltaTime * currentClimpSpeed);
 
     }
 
