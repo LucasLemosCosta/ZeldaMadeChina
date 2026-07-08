@@ -177,25 +177,11 @@ public sealed class PlayerController : Entity
     public void PlayerWallMoving(Vector2 direction, float climSpeed)
     {
 
-        //Get Directions 
+        Vector3 wallRight = Vector3.Cross(Vector3.up, wallHitDown.normal).normalized;
 
-        Vector3 inputDirectionX = Vector2.zero;
-        Vector3 inputDirectionY = new Vector3(0f, direction.y, 0f).normalized;
-
-        if (transform.forward.x >= 0.8f)
-        {
-            inputDirectionX = new Vector3(0f, 0f, direction.x).normalized;
-
-        }
-        else if (transform.forward.z >= 0.8f)
-        {
-            inputDirectionX = new Vector3(direction.x, 0f, 0f).normalized;
-
-        }
-
-        Vector3 movingY = inputDirectionY;
-        Vector3 movingX = inputDirectionX;
-
+        Vector3 movingX = wallRight * direction.x * -1f;
+        Vector3 movingY = Vector3.up * direction.y;
+  
 
         if (movingX.magnitude == 0 && movingY.magnitude == 0)
         {
@@ -228,8 +214,8 @@ public sealed class PlayerController : Entity
             }
         }
 
-        controller.Move(movingY * Time.deltaTime * currentClimpSpeed);
-        controller.Move(movingX * Time.deltaTime * currentClimpSpeed);
+
+        controller.Move((movingX + movingY) * currentClimpSpeed * Time.deltaTime);
 
     }
 
