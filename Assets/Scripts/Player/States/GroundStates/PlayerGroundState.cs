@@ -17,6 +17,11 @@ public class PlayerGroundState : PlayerState
         if (!player.OnGround && player.yVelocity < 0f)
             stateMachine.ChangeState(player.FallState);
 
+        if(player.OnGround && input.OnAttack && player.SwordEquiped)
+        {
+            stateMachine.ChangeState(player.AttackGround);
+        }
+
 
 
     }

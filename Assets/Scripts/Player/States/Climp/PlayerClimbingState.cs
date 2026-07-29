@@ -18,12 +18,12 @@ public class PlayerClimbingState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-
+        player.EquipedSword(false);
         player.transform.rotation = fixRotation;
 
         if(input.Direction != Vector2.zero)
         {
-            player.stamina.DecriseStamina();
+            player.stamina.DecriseStamina(5f);
         }
 
         if (player.yVelocity > 0)

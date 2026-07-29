@@ -13,6 +13,7 @@ public sealed class PlayerController : Entity
     public PlayerJumpIdleState IdleJumpState { get; private set; }
     public PlayerClimbingState ClimbingState { get; private set; }
     public PlayerClimpingAut ClimpingAutState { get; private set; }
+    public AttackGround AttackGround { get; private set; }
 
 
     //Componets
@@ -23,8 +24,7 @@ public sealed class PlayerController : Entity
 
 
     //Equipement
-    public bool SwordEquiped { get; private set; }
-
+    public bool SwordEquiped;
 
     [Header("Settings Moving")]
     [Range(0, 1)][SerializeField] private float acel = 0.1f;
@@ -43,6 +43,10 @@ public sealed class PlayerController : Entity
     [SerializeField] private GameObject equippedSword;
     [SerializeField] private GameObject unequipSword;
 
+    [Header("Shild")]
+    [SerializeField] private GameObject equippedShild;
+    [SerializeField] private GameObject unequipShild;
+
     //Controllers
 
     public float yVelocity { get; private set; } = 0f;
@@ -51,6 +55,7 @@ public sealed class PlayerController : Entity
     private float jumpMirror = 1;
     private float lastDirectionY = 1f;
     private float lastDirectionX = 1f;
+
 
 
     //Wall Settings
@@ -86,6 +91,7 @@ public sealed class PlayerController : Entity
         IdleJumpState = new PlayerJumpIdleState(this, StateMachine, "IdleJump");
         ClimbingState = new PlayerClimbingState(this, StateMachine, "Climbing");
         ClimpingAutState = new PlayerClimpingAut(this, StateMachine, "ClimbingAut");
+        AttackGround = new AttackGround(this, StateMachine, "Attack");
     }
 
     public override void Start()
@@ -112,6 +118,8 @@ public sealed class PlayerController : Entity
         //test sword
         equippedSword.SetActive(SwordEquiped);
         unequipSword.SetActive(!SwordEquiped);
+        equippedShild.SetActive(SwordEquiped);
+        unequipShild.SetActive(!SwordEquiped);
     }
     public override void OnDrawGizmos()
     {
@@ -125,6 +133,25 @@ public sealed class PlayerController : Entity
 
 
     //Methods 
+
+    public void EquipedSword(bool anable)
+    {
+        if (anable == false)
+        {
+            SwordEquiped = anable;
+        }
+
+        if(anable)
+            Anim.SetLayerWeight(1, 1);
+        else
+            Anim.SetLayerWeight(1, 0);
+
+        if(anable && !SwordEquiped)
+        {
+            Anim.SetTrigger("Equiped");
+
+        }
+    }
 
     public override void HandleGravity()
     {

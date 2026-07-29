@@ -61,6 +61,7 @@
   <Project Path="Unity.ProBuilder.AddOns.Editor.csproj" />
   <Project Path="Unity.InputSystem.ForUI.csproj" />
   <Project Path="Unity.Cloud.Common.Runtime.Embedded.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.AI.Navigation.csproj" />
   <Project Path="Unity.Cloud.AppLinking.Runtime.Embedded.csproj" />
   <Project Path="Unity.Collections.CodeGen.csproj" />
@@ -73,7 +74,6 @@
   <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.ShaderGraph.Utilities.csproj" />
   <Project Path="Unity.VisualScripting.Shared.Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.CollabProxy.Editor.csproj" />
   <Project Path="Unity.TerrainTools.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />

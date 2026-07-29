@@ -23,6 +23,17 @@ public class PlayerState : EntityState
     }
 
 
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        if(input.OnAttack)
+        {
+            player.EquipedSword(true);
+        }
+    }
+    
+
+
 
 
 

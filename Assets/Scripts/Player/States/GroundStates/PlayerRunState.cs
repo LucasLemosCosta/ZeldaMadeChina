@@ -8,8 +8,9 @@ public class PlayerRunState : PlayerGroundState
 
     public override void UpdateState()
     {
-        base.UpdateState(); 
-        player.stamina.DecriseStamina();
+        base.UpdateState();
+        player.EquipedSword(false);
+        player.stamina.DecriseStamina(15f);
 
         player.MovingPlayer(input.Direction, player.speed * 2f);
         if (!input.OnRun || input.Direction == Vector2.zero)

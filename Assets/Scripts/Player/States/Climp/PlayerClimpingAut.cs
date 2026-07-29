@@ -12,6 +12,7 @@ public class PlayerClimpingAut : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.EquipedSword(false);
         player.JumpPlayer(6.5f);
         originalControllerHeight = controller.height;
         originalControllerCenter = controller.center;

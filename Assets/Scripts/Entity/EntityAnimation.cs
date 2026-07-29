@@ -5,7 +5,7 @@ public class EntityAnimation : MonoBehaviour
 
     private Entity entity;
 
-    private void Awake()
+    public virtual void Awake()
     {
         entity = GetComponent<Entity>();
     }
@@ -13,4 +13,5 @@ public class EntityAnimation : MonoBehaviour
     {
         entity.SetAnableTriggerAnimation(true);
     }
+
 }

@@ -50,6 +50,7 @@ public class Stamina : MonoBehaviour
         {
             if (currentStamina >= maxStamina)
             {
+                usedStamina.fillAmount = secondUsedStamina.fillAmount;
                 canSpandStamina = true;
             }
         }
@@ -62,19 +63,27 @@ public class Stamina : MonoBehaviour
 
     public void IncreaseStamina()
     {
-        if(currentStamina < maxStamina)
+        if(currentStamina < maxStamina && canSpandStamina)
         {
             currentStamina = Mathf.Lerp(currentStamina, maxStamina + 1, 0.6f * Time.deltaTime);
             usedStamina.fillAmount = currentStamina / maxStamina;
             ShowStamina();
         }
+        else if(currentStamina < maxStamina)
+        {
+            currentStamina = Mathf.Lerp(currentStamina, maxStamina + 1, 0.6f * Time.deltaTime);
+            secondUsedStamina.fillAmount = currentStamina / maxStamina;
+            ShowStamina();
+        }
+
+      
 
 
     }
-    public void DecriseStamina()
+    public void DecriseStamina(float spendStamina)
     {
         ShowStamina();
-        currentStamina = Mathf.Lerp(currentStamina, -1, 0.5f * Time.deltaTime);
+        currentStamina -= Time.deltaTime * spendStamina;
 
         usedStamina.fillAmount = currentStamina / maxStamina;
         secondUsedStamina.fillAmount = usedStamina.fillAmount + 0.1f;
