@@ -9,6 +9,6 @@ public class PlayerJumpIdleState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        player.JumpPlayer(player.jump);
+        player.JumpPlayer(player.forceJumpGround);
     }
 }

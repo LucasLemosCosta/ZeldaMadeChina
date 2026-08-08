@@ -12,7 +12,7 @@ public class PlayerWalkState : PlayerGroundState
         player.stamina.IncreaseStamina();
 
 
-        player.MovingPlayer(input.Direction, player.speed);
+        player.MovingPlayer(input.Direction, player.speedMovingGroundNormal);
 
         if (input.OnRun && player.OnGround && player.stamina.canSpandStamina)
             stateMachine.ChangeState(player.RunState);

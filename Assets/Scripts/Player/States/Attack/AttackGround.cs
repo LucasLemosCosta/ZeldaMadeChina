@@ -5,6 +5,8 @@ public class AttackGround : PlayerState
 {
     private int attackCombo;
     private bool oneMoreAttack;
+
+    private float impulseAttack = 0.3f;
     public AttackGround(PlayerController player, StateMachine stateMachine, string stateBoolName) : base(player, stateMachine, stateBoolName)
     {
     }
@@ -16,18 +18,14 @@ public class AttackGround : PlayerState
 
         anim.SetInteger("AttackCombo", attackCombo);
 
-
-
         input.ConsumeAttack();
-
-        Debug.Log(attackCombo);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
         anim.SetLayerWeight(1, 0);
-        controller.Move(player.transform.forward.normalized * 0.8f * Time.deltaTime);
+        controller.Move(player.transform.forward.normalized * impulseAttack * Time.deltaTime);
 
         if(input.OnAttack && !oneMoreAttack)
         {
@@ -62,6 +60,12 @@ public class AttackGround : PlayerState
         anim.SetLayerWeight(1, 1);
         oneMoreAttack = false;
 
+
+    }
+
+    protected override void ChangeState()
+    {
+        base.ChangeState();
 
     }
 }

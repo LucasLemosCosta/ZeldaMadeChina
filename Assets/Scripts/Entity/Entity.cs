@@ -5,10 +5,11 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
 
-    [Header("Settings Moving")]
-    public float speed = 5f;
-    public float jump = 7f;
-    public float rotationSpeed = 7f;
+    [Header("Settings Moving Ground")]
+    public float speedMovingGroundNormal = 3f;
+    public float speedMovingGroundRun = 5f;
+    public float forceJumpGround = 7f;
+    public float rotationBodySpeed = 7f;
     public float gravity = 9.7f;
 
 
@@ -21,7 +22,7 @@ public abstract class Entity : MonoBehaviour
     [Header("Collider Ground Settings")]
     [SerializeField] private float sizeRaySphereGround = 0.5f;
     [SerializeField] private LayerMask whatIsGround;
-    [SerializeField] private Transform targetGround;
+    [SerializeField] private Transform targetSourceGround;
     public bool OnGround { get; protected set; }
 
     public virtual void Awake()
@@ -48,9 +49,9 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void OnDrawGizmos()
     {
-        if (targetGround == null) targetGround = transform;
+        if (targetSourceGround == null) targetSourceGround = transform;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(targetGround.position, sizeRaySphereGround);
+        Gizmos.DrawWireSphere(targetSourceGround.position, sizeRaySphereGround);
     }
 
 
@@ -67,7 +68,11 @@ public abstract class Entity : MonoBehaviour
 
     private void CheckGround()
     {
-        OnGround = Physics.CheckSphere(targetGround.position, sizeRaySphereGround, whatIsGround);
+        OnGround = Physics.CheckSphere(
+            targetSourceGround.position,
+            sizeRaySphereGround, 
+            whatIsGround
+            );
     }
 
 

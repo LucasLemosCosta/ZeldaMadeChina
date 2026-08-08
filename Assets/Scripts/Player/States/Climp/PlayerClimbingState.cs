@@ -11,7 +11,7 @@ public class PlayerClimbingState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.JumpPlayer(player.jump * 1.6f);
+        player.JumpPlayer(player.forceJumpGround * 1.6f);
         fixRotation = player.transform.rotation;
     }
 

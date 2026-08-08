@@ -31,6 +31,8 @@ public class PlayerState : EntityState
             player.EquipedSword(true);
         }
     }
+
+
     
 
 

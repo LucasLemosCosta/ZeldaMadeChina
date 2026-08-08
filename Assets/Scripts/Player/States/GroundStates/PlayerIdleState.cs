@@ -14,11 +14,17 @@ public class PlayerIdleState : PlayerGroundState
         player.stamina.IncreaseStamina();
 
 
-        if (input.Direction != Vector2.zero && player.OnGround )
+
+
+    }
+
+    protected override void ChangeState()
+    {
+        base.ChangeState();
+        if (input.Direction != Vector2.zero && player.OnGround)
         {
             stateMachine.ChangeState(player.WalkState);
         }
-
     }
 
 }

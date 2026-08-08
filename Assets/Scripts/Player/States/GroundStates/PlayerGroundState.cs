@@ -10,6 +10,8 @@ public class PlayerGroundState : PlayerState
     {
         player.HandleGravity();
         base.UpdateState();
+
+
         if (input.OnJump && player.OnGround && stateMachine.CurrentState != player.RunningJumpState && input.Direction != Vector2.zero)
             stateMachine.ChangeState(player.RunningJumpState);
         if (input.OnJump && player.OnGround && stateMachine.CurrentState != player.RunningJumpState && input.Direction == Vector2.zero)
@@ -21,8 +23,6 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.AttackGround);
         }
-
-
 
     }
 }

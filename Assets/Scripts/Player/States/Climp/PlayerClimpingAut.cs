@@ -25,7 +25,7 @@ public class PlayerClimpingAut : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        controller.Move(player.transform.forward * player.speed * 1.5f * Time.deltaTime);
+        controller.Move(player.transform.forward * player.speedMovingGroundNormal * 1.5f * Time.deltaTime);
 
         player.HandleGravity();
 

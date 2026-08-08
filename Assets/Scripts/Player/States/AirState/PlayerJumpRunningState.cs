@@ -11,14 +11,14 @@ public class PlayerJumpRunningState : PlayerGroundState
     {
         base.Enter();
 
-        player.JumpPlayer(player.jump);
+        player.JumpPlayer(player.forceJumpGround);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
         player.stamina.ShowStamina();
-        player.MovingPlayer(input.Direction, player.speed * 2);
+        player.MovingPlayer(input.Direction, player.speedMovingGroundNormal * 2);
         if (player.OnWallDown)
             stateMachine.ChangeState(player.ClimbingState);
 

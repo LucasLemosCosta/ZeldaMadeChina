@@ -27,17 +27,17 @@ public sealed class PlayerController : Entity
     public bool SwordEquiped;
 
     [Header("Settings Moving")]
-    [Range(0, 1)][SerializeField] private float acel = 0.1f;
+    [Range(0, 1)][SerializeField] private float acelOfMovingGroundSpeed = 0.1f;
     public float climbingSpeed = 3f;
 
 
     [Header("Climping Settings")]
     [SerializeField] private LayerMask whatIsWall;
     [SerializeField] private float timeToCanClimb;
-    [SerializeField] private float sizeRayWallDistance;
+    [SerializeField] private float rayWallDistance;
     [SerializeField] private float sizeRayWallSphere;
-    [SerializeField] private Transform targetWallUp;
-    [SerializeField] private Transform targetWallDown;
+    [SerializeField] private Transform targetSourceWallUp;
+    [SerializeField] private Transform targetSourceWallDown;
 
     [Header("Sword")]
     [SerializeField] private GameObject equippedSword;
@@ -77,6 +77,7 @@ public sealed class PlayerController : Entity
     {
         base.Awake();
         yVelocity = -gravity;
+
         //Get Componests
         stamina = GameObject.FindFirstObjectByType<Stamina>().GetComponent<Stamina>();
         input = GetComponentInChildren<GetInput>();
@@ -103,31 +104,18 @@ public sealed class PlayerController : Entity
     {
         base.Update();
 
-
-        if (!CanClimp)
-        {
-            timerToCanClimp += Time.deltaTime;
-            if (timerToCanClimp >= timeToCanClimb)
-            {
-                timerToCanClimp = 0;
-                CanClimp = true;
-            }
-        }
+        HandleClimb();
+        HandleEquipedWeapon();
 
 
-        //test sword
-        equippedSword.SetActive(SwordEquiped);
-        unequipSword.SetActive(!SwordEquiped);
-        equippedShild.SetActive(SwordEquiped);
-        unequipShild.SetActive(!SwordEquiped);
     }
     public override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(targetWallUp.position + transform.forward * sizeRayWallDistance, sizeRayWallSphere);
-        Gizmos.DrawWireSphere(targetWallDown.position + transform.forward * sizeRayWallDistance, sizeRayWallSphere);
+        Gizmos.DrawWireSphere(targetSourceWallUp.position + transform.forward * rayWallDistance, sizeRayWallSphere);
+        Gizmos.DrawWireSphere(targetSourceWallDown.position + transform.forward * rayWallDistance, sizeRayWallSphere);
 
     }
 
@@ -153,6 +141,7 @@ public sealed class PlayerController : Entity
         }
     }
 
+
     public override void HandleGravity()
     {
         base.HandleGravity();
@@ -172,8 +161,8 @@ public sealed class PlayerController : Entity
     public override void HandleCollider()
     {
         base.HandleCollider();
-        OnWallUp = Physics.SphereCast(targetWallUp.position, sizeRayWallSphere, transform.forward, out wallHitUp, sizeRayWallDistance, whatIsWall);
-        OnWallDown = Physics.SphereCast(targetWallDown.position, sizeRayWallSphere, transform.forward, out wallHitDown, sizeRayWallDistance, whatIsWall);
+        OnWallUp = Physics.SphereCast(targetSourceWallUp.position, sizeRayWallSphere, transform.forward, out wallHitUp, rayWallDistance, whatIsWall);
+        OnWallDown = Physics.SphereCast(targetSourceWallDown.position, sizeRayWallSphere, transform.forward, out wallHitDown, rayWallDistance, whatIsWall);
 
 
     }
@@ -181,32 +170,34 @@ public sealed class PlayerController : Entity
     {
         //Get Direction
         Vector3 inputDirection = new Vector3(direction.x, 0f, direction.y).normalized;
-        Vector3 moviment = Camera.main.transform.TransformDirection(inputDirection);
-        moviment.y = 0;
+        Vector3 filterDirectionWithCamera = Camera.main.transform.TransformDirection(inputDirection);
+        filterDirectionWithCamera.y = 0;
 
 
         if (inputDirection != Vector3.zero)
         {
             //Rotation Player
-            Quaternion targetRotation = Quaternion.LookRotation(moviment);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Quaternion targetFolowRotation = Quaternion.LookRotation(filterDirectionWithCamera);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetFolowRotation, rotationBodySpeed * Time.deltaTime);
 
         }
 
         //Acelerate
-        currentSpeed = Mathf.Lerp(currentSpeed, speed, acel);
+        currentSpeed = Mathf.Lerp(currentSpeed, speed, acelOfMovingGroundSpeed);
         Anim.SetFloat("Speed", currentSpeed);
         //Moving Player
-        controller.Move(moviment * currentSpeed * Time.deltaTime);
+        controller.Move(filterDirectionWithCamera * currentSpeed * Time.deltaTime);
 
     }
 
     public void PlayerWallMoving(Vector2 direction, float climSpeed)
     {
 
-        Vector3 wallRight = Vector3.Cross(Vector3.up, wallHitDown.normal).normalized;
+        int mirror = -1;
 
-        Vector3 movingX = wallRight * direction.x * -1f;
+        Vector3 wallDirectionNormal = Vector3.Cross(Vector3.up, wallHitDown.normal).normalized;
+
+        Vector3 movingX = wallDirectionNormal * direction.x * mirror;
         Vector3 movingY = Vector3.up * direction.y;
   
 
@@ -259,6 +250,29 @@ public sealed class PlayerController : Entity
     }
 
 
+    private void HandleClimb()
+    {
+
+        if (!CanClimp)
+        {
+            timerToCanClimp += Time.deltaTime;
+            if (timerToCanClimp >= timeToCanClimb)
+            {
+                timerToCanClimp = 0;
+                CanClimp = true;
+            }
+        }
+
+    }
+
+    private void HandleEquipedWeapon()
+    {
+        //test sword
+        equippedSword.SetActive(SwordEquiped);
+        unequipSword.SetActive(!SwordEquiped);
+        equippedShild.SetActive(SwordEquiped);
+        unequipShild.SetActive(!SwordEquiped);
+    }
 
 
 

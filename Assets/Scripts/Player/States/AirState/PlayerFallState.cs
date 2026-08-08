@@ -15,7 +15,8 @@ public class PlayerFallState : PlayerAirState
     {
         base.UpdateState();
         
-        player.MovingPlayer(input.Direction, player.speed * 0.6f);
+        player.MovingPlayer(input.Direction, player.speedMovingGroundNormal * 0.6f);
+
 
 
     }

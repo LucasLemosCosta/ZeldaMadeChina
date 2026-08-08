@@ -25,7 +25,7 @@ public abstract class EntityState
 
     public virtual void UpdateState()
     {
-
+        ChangeState();
     }
 
 
@@ -37,6 +37,10 @@ public abstract class EntityState
     }
     public void SetAnableTriggerAnimation(bool anable) => triggerAnimationEnd = anable;
 
+    protected virtual void ChangeState()
+    {
+
+    }
 
 
 
